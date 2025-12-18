@@ -30,7 +30,7 @@ impl RocksDbTreeStore {
     }
 
     /// create a new RocksDB tree store in the current diretory and child directory name is state_db
-    pub fn new_current_directory() -> Result<Self> {
+    pub fn default() -> Result<Self> {
         let current_dir = std::env::current_dir()?;
         let db_path = current_dir.join("state_db");
         Self::new(db_path)
