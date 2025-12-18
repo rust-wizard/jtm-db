@@ -29,6 +29,13 @@ impl RocksDbTreeStore {
         Ok(Self { db: Arc::new(db) })
     }
 
+    /// create a new RocksDB tree store in the current diretory and child directory name is state_db
+    pub fn new_current_directory() -> Result<Self> {
+        let current_dir = std::env::current_dir()?;
+        let db_path = current_dir.join("state_db");
+        Self::new(db_path)
+    }
+
     /// Creates a new temporary RocksDB tree store.
     pub fn new_temporary() -> Result<Self> {
         let temp_dir = tempfile::TempDir::new()?;
